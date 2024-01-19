@@ -1,16 +1,15 @@
-import time
-
+import webview
+import sys
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.serving import run_simple
 
 app = Flask(__name__, template_folder='templates')
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users_info_database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
 
 
 class DB(db.Model):
@@ -21,7 +20,7 @@ class DB(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     message = ''
     if request.method == 'POST':
@@ -29,7 +28,6 @@ def login():
         password = request.form.get('password')
 
         if username and password:
-            connection = db.engine.connect()
             log_info = DB(username=username, password=password)
             db.session.add(log_info)
             db.session.commit()
@@ -45,4 +43,6 @@ def login():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(host='127.0.0.1', port=5050, debug=True)
+    # app.run(host='localhost', port=5050, debug=True)
+    webview.create_window('Login', app)
+    webview.start()
