@@ -39,7 +39,6 @@ def login():
 
     return render_template('form_1.html', message=message)
 
-
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
