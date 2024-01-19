@@ -3,7 +3,6 @@ import sys
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from werkzeug.serving import run_simple
 
 app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users_info_database.db'
@@ -38,6 +37,7 @@ def login():
             message = "Ошибка: логин и пароль обязательны для заполнения"
 
     return render_template('form_1.html', message=message)
+
 
 if __name__ == '__main__':
     with app.app_context():
