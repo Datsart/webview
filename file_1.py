@@ -1,3 +1,5 @@
+import time
+
 import webview
 import sys
 from flask import Flask, render_template, request, redirect, url_for
@@ -31,7 +33,7 @@ def login():
             db.session.add(log_info)
             db.session.commit()
             message = "Данные успешно сохранены в БД"
-            return redirect(url_for('login'))
+            return render_template('form_1.html', message=message)
 
         else:
             message = "Ошибка: логин и пароль обязательны для заполнения"
