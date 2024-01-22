@@ -6,8 +6,15 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-app = Flask(__name__, template_folder='templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users_info_database.db'
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+template_folder = os.path.join(current_dir, 'templates')
+
+app = Flask(__name__, template_folder=template_folder)
+database_path = os.path.join(current_dir, 'users_info_database.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{database_path}'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
