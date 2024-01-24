@@ -5,7 +5,7 @@ a = Analysis(
     ['file_1.py'],
     pathex=[],
     binaries=[],
-    datas=[('templates', 'templates')],
+    datas=[('/Users/artemdatsenko/PycharmProjects/webview/users_info_database.db', '.'), ('templates', 'templates')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -28,10 +28,16 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+)
+app = BUNDLE(
+    exe,
+    name='file_1.app',
+    icon=None,
+    bundle_identifier=None,
 )
