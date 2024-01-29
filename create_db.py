@@ -2,7 +2,7 @@ import sqlite3
 
 
 def create_db_func():
-    connection = sqlite3.connect('users_info_database.db')
+    connection = sqlite3.connect(database='database.db')
     cursor = connection.cursor()
     print('Создана новая БД')
     cursor.execute('''
@@ -16,4 +16,6 @@ def create_db_func():
     print('Создана новая таблица')
     connection.commit()
     # connection.close()
-# create_db_func()
+
+
+create_db_func()
