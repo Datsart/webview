@@ -9,7 +9,8 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 template_folder = os.path.join(current_dir, 'templates')
 
 app = Flask(__name__, template_folder=template_folder)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:////Users/artemdatsenko/PycharmProjects/webview/database.db'
+absolute_path = '/Users/artemdatsenko/PycharmProjects/webview/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{absolute_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
